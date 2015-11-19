@@ -3236,3 +3236,12 @@ class VehiclesControllerTest < ActionController::TestCase
     end
   end
 end
+
+class Api::V7::CategoriesControllerTest < ActionController::TestCase
+  def test_uncaught_error_in_controller
+
+    get :show, {id: '1'}
+    assert_response 500
+    assert_match /Internal Server Error/, json_response['errors'][0]['detail']
+  end
+end
